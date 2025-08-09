@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  DollarSign, 
-  ShoppingCart, 
-  Package, 
-  TrendingUp, 
-  Users,
+import {
+  DollarSign,
+  ShoppingCart,
+  Package,
   AlertTriangle,
-  Calendar,
   BarChart3,
-  Loader2
+  Loader2,
 } from 'lucide-react';
 import { StatsCard } from './dashboard/StatsCard';
 import { SalesChart } from './dashboard/SalesChart';
@@ -17,13 +14,13 @@ import { TopProductsTable } from './dashboard/TopProductsTable';
 import { InventoryAlerts } from './dashboard/InventoryAlerts';
 import { RevenueMetrics } from './dashboard/RevenueMetrics';
 import { analyticsService } from '../services/analyticsService';
-import { 
-  DashboardStats, 
-  SalesData, 
-  CategoryPerformance, 
+import {
+  DashboardStats,
+  SalesData,
+  CategoryPerformance,
   ProductPerformance,
   RevenueByPeriod,
-  InventoryAlert
+  InventoryAlert,
 } from '../types/analytics';
 
 export const Dashboard: React.FC = () => {
@@ -54,14 +51,14 @@ export const Dashboard: React.FC = () => {
         categoryResponse,
         productsResponse,
         revenueResponse,
-        alertsResponse
+        alertsResponse,
       ] = await Promise.all([
         analyticsService.getDashboardStats(),
         analyticsService.getSalesData(salesPeriod),
         analyticsService.getCategoryPerformance(),
         analyticsService.getTopProducts(),
         analyticsService.getRevenueByPeriod(),
-        analyticsService.getInventoryAlerts()
+        analyticsService.getInventoryAlerts(),
       ]);
 
       setStats(statsData);
@@ -89,7 +86,7 @@ export const Dashboard: React.FC = () => {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('tr-TR', {
       style: 'currency',
-      currency: 'TRY'
+      currency: 'TRY',
     }).format(amount);
   };
 
