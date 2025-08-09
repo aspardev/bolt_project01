@@ -44,11 +44,11 @@ export const Pagination: React.FC<PaginationProps> = ({
   const visiblePages = getVisiblePages();
 
   return (
-    <div className="flex items-center justify-center space-x-1 mt-8">
+    <div className="flex items-center justify-center space-x-2 mt-12 animate-fade-in">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-2 rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="p-3 rounded-xl glass hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover-lift text-white"
       >
         <ChevronLeft size={20} />
       </button>
@@ -58,12 +58,12 @@ export const Pagination: React.FC<PaginationProps> = ({
           key={index}
           onClick={() => typeof page === 'number' && onPageChange(page)}
           disabled={page === '...'}
-          className={`px-3 py-2 rounded-lg border ${
+          className={`px-4 py-3 rounded-xl font-medium transition-all duration-300 ${
             page === currentPage
-              ? 'bg-blue-600 text-white border-blue-600'
+              ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg scale-110'
               : page === '...'
-              ? 'border-transparent cursor-default'
-              : 'border-gray-300 hover:bg-gray-50'
+              ? 'glass text-white/60 cursor-default'
+              : 'glass text-white hover:bg-white/20 hover-lift'
           }`}
         >
           {page}
@@ -73,7 +73,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-2 rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="p-3 rounded-xl glass hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover-lift text-white"
       >
         <ChevronRight size={20} />
       </button>

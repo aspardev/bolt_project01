@@ -5,30 +5,52 @@ import { BarChart3, Package2, User } from 'lucide-react';
 const Navbar: React.FC<{ onProfileClick: () => void }> = ({ onProfileClick }) => {
   const location = useLocation();
   return (
-    <nav className="bg-white border-b border-gray-200 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
-        <div className="flex space-x-4">
+    <nav className="glass-strong border-b border-white/20 shadow-lg animate-slide-down">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-18">
+        <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-600 rounded-xl flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M13 3L4 14h7v7l9-11h-7V3z"/>
+              </svg>
+            </div>
+            <span className="text-xl font-bold text-white">E-Commerce</span>
+          </div>
+        </div>
+        
+        <div className="flex space-x-2">
           <Link
             to="/dashboard"
-            className={`flex items-center space-x-2 px-3 py-2 rounded-lg font-medium transition-colors ${location.pathname === '/dashboard' ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'}`}
+            className={`flex items-center space-x-2 px-4 py-2 rounded-xl font-medium transition-all duration-300 hover-lift ${
+              location.pathname === '/dashboard' 
+                ? 'bg-white/20 text-white shadow-lg backdrop-blur-sm' 
+                : 'text-white/80 hover:text-white hover:bg-white/10'
+            }`}
           >
             <BarChart3 size={20} />
             <span>Dashboard</span>
           </Link>
           <Link
             to="/products"
-            className={`flex items-center space-x-2 px-3 py-2 rounded-lg font-medium transition-colors ${location.pathname === '/products' ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'}`}
+            className={`flex items-center space-x-2 px-4 py-2 rounded-xl font-medium transition-all duration-300 hover-lift ${
+              location.pathname === '/products' 
+                ? 'bg-white/20 text-white shadow-lg backdrop-blur-sm' 
+                : 'text-white/80 hover:text-white hover:bg-white/10'
+            }`}
           >
             <Package2 size={20} />
             <span>Ürünler</span>
           </Link>
         </div>
+        
         <button
           onClick={onProfileClick}
-          className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+          className="flex items-center space-x-2 px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 hover-lift"
         >
-          <User className="w-5 h-5" />
-          <span>Profil</span>
+          <div className="w-8 h-8 bg-gradient-to-br from-pink-400 to-purple-600 rounded-lg flex items-center justify-center">
+            <User className="w-4 h-4 text-white" />
+          </div>
+          <span className="hidden sm:block">Profil</span>
         </button>
       </div>
     </nav>

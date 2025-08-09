@@ -71,24 +71,24 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
   const activeFilterCount = Object.values(filters).filter(Boolean).length;
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+    <div className="card-modern p-6 mb-8 animate-slide-up">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div className="flex items-center space-x-4 flex-1">
           <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
               placeholder="Ürün ara..."
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
-              className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="input-modern pl-12 pr-4 py-3 w-full text-lg"
             />
           </div>
 
           <select
             value={filters.category || ''}
             onChange={(e) => handleCategoryChange(e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="input-modern px-4 py-3 font-medium"
           >
             <option value="">Tüm Kategoriler</option>
             {categories.map((category) => (
@@ -101,7 +101,7 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
           <select
             value={filters.status || ''}
             onChange={(e) => handleStatusChange(e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="input-modern px-4 py-3 font-medium"
           >
             <option value="">Tüm Durumlar</option>
             <option value="active">Aktif</option>
@@ -113,7 +113,7 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
         <div className="flex items-center space-x-3">
           <button
             onClick={() => setShowAdvanced(!showAdvanced)}
-            className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+            className="flex items-center space-x-2 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl transition-all duration-300 hover-lift font-medium"
           >
             <SlidersHorizontal size={16} />
             <span>Gelişmiş</span>
@@ -122,24 +122,24 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
           {activeFilterCount > 0 && (
             <button
               onClick={clearFilters}
-              className="flex items-center space-x-2 px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+              className="flex items-center space-x-2 px-4 py-3 text-red-600 hover:bg-red-50 rounded-xl transition-all duration-300 hover-lift font-medium"
             >
               <X size={16} />
               <span>Temizle ({activeFilterCount})</span>
             </button>
           )}
 
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-500 font-medium px-3 py-2 bg-gray-50 rounded-xl">
             {totalCount} ürün bulundu
           </div>
         </div>
       </div>
 
       {showAdvanced && (
-        <div className="mt-4 pt-4 border-t border-gray-200">
+        <div className="mt-6 pt-6 border-t border-gray-200 animate-slide-down">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-3">
                 Sıralama
               </label>
               <select
@@ -148,7 +148,7 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
                   const [sortBy, sortOrder] = e.target.value.split('-');
                   handleSortChange(sortBy, sortOrder);
                 }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="input-modern w-full px-4 py-3 font-medium"
               >
                 <option value="createdAt-desc">En Yeni</option>
                 <option value="createdAt-asc">En Eski</option>

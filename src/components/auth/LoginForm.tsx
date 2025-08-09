@@ -31,17 +31,17 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-md mx-auto animate-fade-in">
       <div className="text-center mb-8">
-        <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-          <Lock className="w-8 h-8 text-white" />
+        <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl hover-glow animate-float">
+          <Lock className="w-10 h-10 text-white" />
         </div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Hoş Geldiniz</h1>
-        <p className="text-gray-600">Hesabınıza giriş yapın</p>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-3">Hoş Geldiniz</h1>
+        <p className="text-gray-600 text-lg">Hesabınıza giriş yapın</p>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center space-x-3 animate-slide-down">
           <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
           <p className="text-red-700 text-sm">{error}</p>
         </div>
@@ -58,7 +58,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
               type="email"
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+              className="input-modern w-full pl-10 pr-4 py-3"
               placeholder="ornek@email.com"
               required
             />
@@ -75,7 +75,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
               type={showPassword ? 'text' : 'password'}
               value={formData.password}
               onChange={(e) => handleInputChange('password', e.target.value)}
-              className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+              className="input-modern w-full pl-10 pr-12 py-3"
               placeholder="••••••••"
               required
             />
@@ -95,7 +95,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
               type="checkbox"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
-              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 transition-all"
             />
             <span className="ml-2 text-sm text-gray-600">Beni hatırla</span>
           </label>
@@ -111,11 +111,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2"
+          className="btn-gradient w-full py-4 px-4 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 text-lg font-semibold"
         >
           {isLoading ? (
             <>
-              <Loader2 className="w-5 h-5 animate-spin" />
+              <div className="spinner w-5 h-5"></div>
               <span>Giriş yapılıyor...</span>
             </>
           ) : (
@@ -129,15 +129,15 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           Hesabınız yok mu?{' '}
           <button
             onClick={onSwitchToRegister}
-            className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+            className="text-blue-600 hover:text-blue-700 font-semibold transition-colors hover:underline"
           >
             Kayıt olun
           </button>
         </p>
       </div>
 
-      <div className="mt-6 text-center">
-        <p className="text-xs text-gray-500">
+      <div className="mt-6 text-center p-4 bg-blue-50 rounded-xl">
+        <p className="text-sm text-blue-600 font-medium">
           Demo için: admin@example.com / admin123
         </p>
       </div>

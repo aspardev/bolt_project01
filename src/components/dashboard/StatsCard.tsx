@@ -43,30 +43,49 @@ export const StatsCard: React.FC<StatsCardProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+    <div className="card-modern p-6 hover-lift animate-scale-in group">
       <div className="flex items-center justify-between mb-4">
-        <div className={`p-3 rounded-lg ${lightBg}`}>
-          <div className={textColor}>
+        <div className={`p-4 rounded-2xl bg-gradient-to-br ${
+          color === 'blue' ? 'from-blue-400 to-blue-600' :
+          color === 'green' ? 'from-green-400 to-green-600' :
+          color === 'purple' ? 'from-purple-400 to-purple-600' :
+          color === 'orange' ? 'from-orange-400 to-orange-600' :
+          'from-red-400 to-red-600'
+        } shadow-lg group-hover:shadow-xl transition-all duration-300`}>
+          <div className="text-white">
             {icon}
           </div>
         </div>
         {change !== undefined && (
-          <div className={`flex items-center space-x-1 ${getTrendColor()}`}>
+          <div className={`flex items-center space-x-1 px-3 py-1 rounded-full ${
+            change > 0 ? 'bg-green-100 text-green-700' :
+            change < 0 ? 'bg-red-100 text-red-700' :
+            'bg-gray-100 text-gray-700'
+          } transition-all duration-300`}>
             {getTrendIcon()}
             <span className="text-sm font-medium">
-              {Math.abs(change)}%
+              {change > 0 ? '+' : ''}{Math.abs(change)}%
             </span>
           </div>
         )}
       </div>
       
       <div className="space-y-1">
-        <h3 className="text-sm font-medium text-gray-600">{title}</h3>
-        <p className="text-2xl font-bold text-gray-900">{value}</p>
+        <h3 className="text-sm font-medium text-gray-600 group-hover:text-gray-700 transition-colors">{title}</h3>
+        <p className="text-3xl font-bold text-gray-900 group-hover:text-gray-800 transition-colors">{value}</p>
         {subtitle && (
-          <p className="text-xs text-gray-500">{subtitle}</p>
+          <p className="text-xs text-gray-500 group-hover:text-gray-600 transition-colors">{subtitle}</p>
         )}
       </div>
+      
+      {/* Decorative gradient line */}
+      <div className={`mt-4 h-1 rounded-full bg-gradient-to-r ${
+        color === 'blue' ? 'from-blue-400 to-blue-600' :
+        color === 'green' ? 'from-green-400 to-green-600' :
+        color === 'purple' ? 'from-purple-400 to-purple-600' :
+        color === 'orange' ? 'from-orange-400 to-orange-600' :
+        'from-red-400 to-red-600'
+      } opacity-20 group-hover:opacity-40 transition-opacity duration-300`}></div>
     </div>
   );
 };
