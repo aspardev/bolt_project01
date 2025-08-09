@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { Plus, Grid3X3, List, Loader2, BarChart3, Package2 } from 'lucide-react';
+import { Plus, Grid3X3, List, Loader2, BarChart3, Package2, User } from 'lucide-react';
+import { AuthProvider, useAuthContext } from './hooks/useAuth';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
+import { AuthModal } from './components/auth/AuthModal';
+import { UserProfile } from './components/auth/UserProfile';
 import { useProducts } from './hooks/useProducts';
 import { ProductCard } from './components/ProductCard';
 import { ProductForm } from './components/ProductForm';
@@ -12,8 +16,11 @@ import { Product } from './types/product';
 type ViewMode = 'grid' | 'list';
 type AppView = 'dashboard' | 'products';
 
-function App() {
+function AppContent() {
+  const { user, isAuthenticated, logout } = useAuthContext();
   const [currentView, setCurrentView] = useState<AppView>('dashboard');
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showUserProfile, setShowUserProfile] = useState(false);
   const {
     products,
     loading,
@@ -59,6 +66,10 @@ function App() {
     }
   };
 
+  const handleAuthSuccess = () => {
+    setShowAuthModal(false);
+  };
+
   if (currentView === 'dashboard') {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -89,6 +100,54 @@ function App() {
                   <Package2 size={20} />
                   <span>Ürünler</span>
                 </button>
+              </div>
+              
+              <div className="flex items-center space-x-4">
+                {isAuthenticated && user ? (
+                  <div className="flex items-center space-x-3">
+                    <span className="text-sm text-gray-600">Hoş geldiniz, {user.name}</span>
+                    <button
+                      onClick={() => setShowUserProfile(true)}
+                      className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                    >
+                      {user.avatar ? (
+                        <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
+                      ) : (
+                        <User className="w-5 h-5" />
+                      )}
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => setShowAuthModal(true)}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors mr-4"
+                  >
+                    Giriş Yap
+                  </button>
+                )}
+                
+                {isAuthenticated && user ? (
+                  <div className="flex items-center space-x-3">
+                    <span className="text-sm text-gray-600">Hoş geldiniz, {user.name}</span>
+                    <button
+                      onClick={() => setShowUserProfile(true)}
+                      className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                    >
+                      {user.avatar ? (
+                        <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
+                      ) : (
+                        <User className="w-5 h-5" />
+                      )}
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => setShowAuthModal(true)}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    Giriş Yap
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -250,7 +309,28 @@ function App() {
           onClose={() => setViewingProduct(undefined)}
         />
       )}
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+      />
+
+      {/* User Profile Modal */}
+      {showUserProfile && (
+        <UserProfile onClose={() => setShowUserProfile(false)} />
+      )}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <ProtectedRoute requireAuth={false}>
+        <AppContent />
+      </ProtectedRoute>
+    </AuthProvider>
   );
 }
 
