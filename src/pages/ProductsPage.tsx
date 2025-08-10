@@ -5,7 +5,7 @@ import { ProductForm } from '../components/ProductForm';
 import { ProductFilters } from '../components/ProductFilters';
 import { ProductDetailModal } from '../components/ProductDetailModal';
 import { Pagination } from '../components/Pagination';
-import { Plus, Grid3X3, List } from 'lucide-react';
+import { Plus, Grid3X3, List, Package } from 'lucide-react';
 import { Product } from '../types/product';
 
 const ProductsPage: React.FC = () => {
